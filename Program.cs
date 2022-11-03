@@ -23,6 +23,9 @@ const int MONSTER_KNIGHT_HEALTH = 15;
 const int MONSTER_KNIGHT_ATTACK = 4;
 const int MONSTER_KNIGHT_ARMOR = 3;
 const int MONSTER_KNIGHT_SPEED = 3;
+
+const string WIN_MESSAGE = "{0} won {1} times";
+const string WON_MOST_MESSAGE = "{0} has won most battles";
 #endregion
 
 int pirate_wins = 0;
@@ -227,11 +230,25 @@ for (int i = 0; i < 10_000; i++)
 
 Console.WriteLine();
 
-const string OUTPUT = "{0} won {1} times";
-Console.WriteLine(OUTPUT, "Pirate", pirate_wins);
-Console.WriteLine(OUTPUT, "Stone Chewer", stone_chewer_wins);
-Console.WriteLine(OUTPUT, "Ghost Warrior", ghost_warrior_wins);
-Console.WriteLine(OUTPUT, "Outworlder", outworlder_wins);
-Console.WriteLine(OUTPUT, "Monster Knight", monster_knight_wins);
-Console.WriteLine(OUTPUT, "Dark Goblin", dark_goblin_wins);
+Console.WriteLine(WIN_MESSAGE, "Pirate", pirate_wins);
+Console.WriteLine(WIN_MESSAGE, "Stone Chewer", stone_chewer_wins);
+Console.WriteLine(WIN_MESSAGE, "Ghost Warrior", ghost_warrior_wins);
+Console.WriteLine(WIN_MESSAGE, "Outworlder", outworlder_wins);
+Console.WriteLine(WIN_MESSAGE, "Monster Knight", monster_knight_wins);
+Console.WriteLine(WIN_MESSAGE, "Dark Goblin", dark_goblin_wins);
 Console.WriteLine("Draw occurred " + draws + " many times");
+
+Console.WriteLine();
+
+int most_wins = Math.Max(pirate_wins, Math.Max(stone_chewer_wins, Math.Max(ghost_warrior_wins, Math.Max(outworlder_wins, Math.Max(monster_knight_wins, dark_goblin_wins)))));
+string most_wins_character;
+
+if (most_wins == pirate_wins) { most_wins_character = "Pirate"; }
+else if (most_wins == stone_chewer_wins) { most_wins_character = "Stone Chewer"; }
+else if (most_wins == ghost_warrior_wins) { most_wins_character = "Ghost Warrior"; }
+else if (most_wins == outworlder_wins) { most_wins_character = "Outworlder"; }
+else if (most_wins == monster_knight_wins) { most_wins_character = "Monster Knight"; }
+else { most_wins_character = "Dark Goblin"; }
+
+if (most_wins < draws) { Console.Write("Draw occured the most, but "); }
+Console.Write(WON_MOST_MESSAGE, most_wins_character);
